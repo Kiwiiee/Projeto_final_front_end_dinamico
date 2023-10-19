@@ -1,0 +1,25 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-image: url("https://media.istockphoto.com/id/1313803199/vector/vector-tropical-pattern-with-whole-and-cut-guava-on-a-light-background.jpg?s=612x612&w=0&k=20&c=QZGTAmeNqxa_up1g7c1CKRZecuw_d8VGhCpL_yFA5sA="); */
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+#create , #login{
+    background-color: rgb(205, 216, 208);
+}
+
+#create_focus{
+    background-color: transparent !important;
+    backdrop-filter: blur(20px);
+}
+
+div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
