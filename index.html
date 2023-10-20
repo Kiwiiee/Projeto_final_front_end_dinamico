@@ -5,18 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./styles/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,800;1,800&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav>
 
     </nav>
-    <div id="modal_create">
-        <div id="login" >
+    <div id="modal_create" class="content">
+        <div id="login" class="first-column">
             <h2>Seja bem vindo de volta à <span>Go Ada</span>! :)</h2>
             <p class="description">Acesse novamente sua conta e seja feliz!!</p>
-            <button class="button sign_in">Sign in</button>
+            <button class="button" id="signin">Sign in</button>
         </div>
-        <div id="create_focus">
+        <div id="create_focus" class="second-column">
             <h2>Crie uma conta</h2>
             <section>
             <a href=""><img src="" alt=""></a>
@@ -32,9 +35,14 @@
             </div>
         </div>
     </div>
-    <div id="modal_login">
-        <div id="login_focus">
-            <h2>Acessse sua conta</h2>
+    <div id="modal_login" class="content">
+        <div id="create"  class="first-column">
+            <h2>Olá Amigo! :)</h2>
+            <p  class="description">Junte-se imediatamente à <span>Go Ada</span></p>
+            <button class="button" id="signup">Sign up</button>
+        </div>
+        <div id="login_focus"  class="second-column">
+            <h2>Acesse sua conta</h2>
             <section>
             <a href=""><img src="" alt=""></a>
             <a href=""><img src="" alt=""></a>
@@ -46,11 +54,6 @@
             <input type="text" class="password" placeholder="Senha">
             <button class="button sign_in">Sign in</button>
             </div>
-        </div>
-        <div id="create" >
-            <h2>Olá Amigo! :)</h2>
-            <p  class="description">Junte-se imediatamente à <span>Go Ada</span></p>
-            <button class="button sign_up">Sign up</button>
         </div>
     </div>
     <script src="./scripts/login-cadastro.js"></script>
