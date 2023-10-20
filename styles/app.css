@@ -1,6 +1,11 @@
 @import url("../components/card/card.css");
 @import url("../components/buttonAdd/addButton.css");
 
+.columns{
+    display: flex;
+    justify-content: space-between;
+}
+
 .column{
     width: 300px;
     padding: 1rem 2rem;
@@ -20,16 +25,83 @@
     align-items: center;
     inset: 0;
     background-color: #0003;
+    font-size: 16px;
 
     & #modal-content{
+        max-width: 30%;
         background-color: white;
         border-radius: .4rem;
         z-index: 100000000000000000000000000000000000000000;
         width: 80vw;
         height: 80vh;
-        padding: 2rem;
+        padding: 2rem;  
+        
+        & form{
+            display: flex;
+            flex-direction: column;
+            
+            & label{
+                font-size: 18px;
+                font-weight: bold;
+                user-select: none;
+            }
+
+            & span{
+                font-size: 18px;
+                font-weight: bold;
+                user-select: none;
+            }
+            
+            & .prioridade{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                
+                & label{
+                    font-size: 14px;
+                    font-weight: normal;
+                    user-select: none;
+                }
+
+                & input{
+                    max-width: 1rem;
+                }
+            }
+            & input{
+                margin: .5rem 0;
+                padding: .5rem;
+                border-radius: .5rem;
+                margin-bottom: 1rem;
+            }
+            & input[type="submit"]{
+                position: relative;
+                border: .2rem var(--goiaba-verde-dark) solid;
+                color: white;
+                background-color: var(--goiaba-verde-dark);
+                cursor: pointer;
+                transition: .25s;
+                max-width: 10rem;
+                right: 0;
+                bottom: 0;
+                &:hover{
+                    background-color: var(--goiaba-verde);
+                }
+                
+            }
+
+            & textarea{
+                width: 100%;
+                margin: .5rem 0;
+                border-radius: .5rem;
+                resize: none;
+                font-size: 16px;
+            }
+            
+        }
     }
 }
+
+
 
 .modalVisible{
     display: flex !important;

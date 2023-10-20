@@ -106,6 +106,7 @@
           await setDoc(doc(store, user.user.uid, "Tasks"), {
             name: "Tarefa exemplo!",
             priority: "low",
+            column: "todo",
             description: "Essa é uma descrição",
             conclusion: new Date()
           });

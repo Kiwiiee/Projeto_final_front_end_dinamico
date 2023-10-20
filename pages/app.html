@@ -8,34 +8,56 @@
     <link rel="stylesheet" href="../styles/global.css">
 </head>
 <body>
-    <div id="column">
-        primeiro
-        <component-card title="Teste" ></component-card>
-        segundo
-        <component-card title="Penes"></component-card>
-    </div> 
+    <div class="columns">
+        <div id="todo">
+            <div class="dropzone"></div>
+            <component-card title="Teste" ></component-card>
+            segundo
+            <component-card title="Penes"></component-card>
+        </div> 
+        <div id="progress">
+            <div class="dropzone"></div>
+            <component-card title="Teste" ></component-card>
+            segundo
+            <component-card title="Penes"></component-card>
+        </div> 
+        <div id="done">
+            <div class="dropzone"></div>
+            <component-card title="Teste" ></component-card>
+            segundo
+            <component-card title="Penes"></component-card>
+        </div> 
+    </div>
+    
     <div id="modal">
         <div id="modal-content">
-            <form action="">
-            <h2>ALA O GAY</h2>
-            <label for="titulo">Titulo</label>
-            <input id="titulo" placeholder="Insira o nome da tarefa!">
-            <span>Prioridade</span>
-            <label for="baixo">baixo</label>
-            <input id="baixo" name="prioridad" type="radio" value="baixo">
-
-            <label for="medio">medios</label>
-            <input id="medio" name="prioridad" type="radio" value="medio">
-
-            <label for="alto">altuns</label>
-            <input id="alto" name="prioridad" type="radio" value="alto">
-
-            <label for="data">Data de conclusão</label>
-            <input name="data" type="date">
+            <h2>Criar Tarefa</h2>
+            <form id="form">
             
-            <label for="descricao">Descrição</label>
-            <textarea name="descricao" placeholder="Insira a descrição da tarefa!"></textarea>
+                <label for="titulo">Titulo</label>
+                <input id="titulo" placeholder="Insira o nome da tarefa!">
+                <div class="prioridade">
+                    <span>Prioridade</span>
+                    <div class="seletor">
+                    <input id="baixo"  name="prioridad" type="radio" value="baixo">
+                    <label for="baixo">Baixa</label>    
+                    </div>
+                    <div class="seletor">
+                    <input id="medio"  name="prioridad" type="radio" value="medio">
+                    <label for="medio">Média</label>
+                    </div>
+                    <div class="seletor">
+                    <input id="alto"  name="prioridad" type="radio" value="alto">
+                    <label for="alto">Alta</label>
+                    </div>
+                </div>
+                <label for="data">Data de conclusão</label>
+                <input name="data" id="data" type="date">
+                
+                <label for="descricao">Descrição</label>
+                <textarea rows="5" id="descricao" name="descricao" placeholder="Insira a descrição da tarefa!"></textarea>
 
+                <input type="submit" value="Criar tarefa">
             </form>
         </div>
     </div>
@@ -46,5 +68,83 @@
     <script type="module" src="../components/card/card.js"></script>
     
    
+    <script type="module">
+        import {initializeApp} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"
+        import { getFirestore, getDocs, collection,setDoc, doc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+        
+        const todo = document.getElementById("todo")
+        const progress = document.getElementById("progress")
+        const done = document.getElementById("done")
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyCg9aild2T5jd9b9WJBxVWfrBoopwn4fCs",
+          authDomain: "goada-d6121.firebaseapp.com",
+          projectId: "goada-d6121",
+          storageBucket: "goada-d6121.appspot.com",
+          messagingSenderId: "630141478826",
+          appId: "1:630141478826:web:39fd58178453ca968cadd3"
+        };
+        
+        const uid = localStorage.getItem("uid");
+        if(uid == "" || uid == undefined){
+            window.location.href = "/index.html"
+        }
+        const app = initializeApp(firebaseConfig);
+        
+        const store = getFirestore(app);
+        console.log(uid)
+        const tasks = await getDocs(collection(store, uid));
+        tasks.forEach((doc)=>{
+
+            const data = doc.data();
+            const element = document.createElement("component-card");
+                element.title = data.name;
+            if(data.column == "todo"){
+                todo.appendChild(element)
+            }else if(data.column == "progress"){
+                progress.appendChild(element)
+            }else if(data.column == "done"){
+                done.appendChild(element)
+            }
+
+        })
+
+
+        form.addEventListener("submit", async (e)=>{
+            e.preventDefault();
+
+            const title = document.getElementById("titulo").value;
+            const priority = document.getElementsByName("prioridad");
+            let priorityValue = "";
+            
+            for (let i = 0; i < priority.length; i++) {
+                if (priority[i].checked)
+                    priorityValue = priority[i].value;
+            }
+            const conclusion = document.getElementById("data").value;
+            const description = document.getElementById("descricao").value;
+
+            await setDoc(doc(store, uid, firestoreAutoId()), {
+                name: title,
+                priority: priorityValue,
+                column: "todo",
+                description: description,
+                conclusion: new Date(conclusion)
+              });
+        })
+
+        const firestoreAutoId = () => {
+            const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+          
+            let autoId = ''
+          
+            for (let i = 0; i < 20; i++) {
+              autoId += CHARS.charAt(
+                Math.floor(Math.random() * CHARS.length)
+              )
+            }
+            return autoId
+          }
+      </script>
 </body>
 </html>

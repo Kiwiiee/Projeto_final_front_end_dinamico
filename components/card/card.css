@@ -1,6 +1,15 @@
 component-card .card{
     padding: 0.1rem .5rem;
     background-color: white;
-    border-left: 6px solid var(--goiaba-amarelo);
+    display: flex;
+    
     border-radius: 6px;
+
+    & .status{
+        flex-grow: 1;
+        width: 10%;
+        height: 100%;
+        background-color: 6px solid var(--goiaba-amarelo);
+    }
+
 }
