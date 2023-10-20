@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apricartivo</title>
+    <link rel="stylesheet" href="../styles/app.css">
+    <link rel="stylesheet" href="../styles/global.css">
+</head>
+<body>
+    <div id="column">
+        primeiro
+        <component-card title="Teste" ></component-card>
+        segundo
+        <component-card title="Penes"></component-card>
+    </div> 
+    <div id="modal">
+        <div id="modal-content">
+            <form action="">
+            <h2>ALA O GAY</h2>
+            <label for="titulo">Titulo</label>
+            <input id="titulo" placeholder="Insira o nome da tarefa!">
+            <span>Prioridade</span>
+            <label for="baixo">baixo</label>
+            <input id="baixo" name="prioridad" type="radio" value="baixo">
+
+            <label for="medio">medios</label>
+            <input id="medio" name="prioridad" type="radio" value="medio">
+
+            <label for="alto">altuns</label>
+            <input id="alto" name="prioridad" type="radio" value="alto">
+
+            <label for="data">Data de conclusão</label>
+            <input name="data" type="date">
+            
+            <label for="descricao">Descrição</label>
+            <textarea name="descricao" placeholder="Insira a descrição da tarefa!"></textarea>
+
+            </form>
+        </div>
+    </div>
+
+    <add-button></add-button>
+    <script src="../scripts/app.js"></script>
+    <script type="module" src="../components/buttonAdd/addButton.js"></script>
+    <script type="module" src="../components/card/card.js"></script>
+    
+   
+</body>
+</html>

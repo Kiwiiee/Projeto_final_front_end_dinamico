@@ -1,0 +1,6 @@
+component-card .card{
+    padding: 0.1rem .5rem;
+    background-color: white;
+    border-left: 6px solid var(--goiaba-amarelo);
+    border-radius: 6px;
+}
