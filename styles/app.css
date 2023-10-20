@@ -1,0 +1,37 @@
+@import url("../components/card/card.css");
+@import url("../components/buttonAdd/addButton.css");
+
+.column{
+    width: 300px;
+    padding: 1rem 2rem;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    background-color: gainsboro;
+}
+
+#modal{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 100000000;
+    display:none;
+    justify-content: center;
+    align-items: center;
+    inset: 0;
+    background-color: #0003;
+
+    & #modal-content{
+        background-color: white;
+        border-radius: .4rem;
+        z-index: 100000000000000000000000000000000000000000;
+        width: 80vw;
+        height: 80vh;
+        padding: 2rem;
+    }
+}
+
+.modalVisible{
+    display: flex !important;
+}
+

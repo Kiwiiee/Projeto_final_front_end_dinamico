@@ -1,0 +1,30 @@
+add-button{
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    width: 80px;
+    height: 80px;
+    padding: 0.1rem .5rem;
+    background-color:var(--goiaba-verde);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    transition: .25s;
+    
+    
+    &:hover{
+        background-color: var(--goiaba-verde-light);
+        cursor: pointer;
+    }
+    
+    & #buto{
+        & p{            
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+        }
+    }
+
+}
