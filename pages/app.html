@@ -8,25 +8,19 @@
     <link rel="stylesheet" href="../styles/global.css">
 </head>
 <body>
+    <header>
+
+    </header>
     <div class="columns">
         <div id="todo">
-            <div class="dropzone"></div>
-            <component-card title="Teste" ></component-card>
-            segundo
-            <component-card title="Penes"></component-card>
+            <div data-name="todo" class="dropzone"></div>
         </div> 
         <div id="progress">
-            <div class="dropzone"></div>
-            <component-card title="Teste" ></component-card>
-            segundo
-            <component-card title="Penes"></component-card>
+            <div data-name="progress" class="dropzone"></div>
         </div> 
         <div id="done">
-            <div class="dropzone"></div>
-            <component-card title="Teste" ></component-card>
-            segundo
-            <component-card title="Penes"></component-card>
-        </div> 
+            <div data-name="done" class="dropzone"></div>
+        </div>
     </div>
     
     <div id="modal">
@@ -63,18 +57,18 @@
     </div>
 
     <add-button></add-button>
-    <script src="../scripts/app.js"></script>
     <script type="module" src="../components/buttonAdd/addButton.js"></script>
     <script type="module" src="../components/card/card.js"></script>
     
    
     <script type="module">
         import {initializeApp} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"
-        import { getFirestore, getDocs, collection,setDoc, doc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+        import { getFirestore, getDocs, updateDoc, collection,setDoc, doc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
         
-        const todo = document.getElementById("todo")
-        const progress = document.getElementById("progress")
-        const done = document.getElementById("done")
+        const todo = document.getElementById("todo");
+        const progress = document.getElementById("progress");
+        const done = document.getElementById("done");
+        const modal = document.getElementById("modal");
 
         const firebaseConfig = {
           apiKey: "AIzaSyCg9aild2T5jd9b9WJBxVWfrBoopwn4fCs",
@@ -92,27 +86,11 @@
         const app = initializeApp(firebaseConfig);
         
         const store = getFirestore(app);
-        console.log(uid)
-        const tasks = await getDocs(collection(store, uid));
-        tasks.forEach((doc)=>{
-
-            const data = doc.data();
-            const element = document.createElement("component-card");
-                element.title = data.name;
-            if(data.column == "todo"){
-                todo.appendChild(element)
-            }else if(data.column == "progress"){
-                progress.appendChild(element)
-            }else if(data.column == "done"){
-                done.appendChild(element)
-            }
-
-        })
-
+        updatedCardsWithFirebase();
 
         form.addEventListener("submit", async (e)=>{
             e.preventDefault();
-
+            modal.classList.remove("modalVisible")
             const title = document.getElementById("titulo").value;
             const priority = document.getElementsByName("prioridad");
             let priorityValue = "";
@@ -123,17 +101,20 @@
             }
             const conclusion = document.getElementById("data").value;
             const description = document.getElementById("descricao").value;
+            const id = firestoreAutoId();
 
-            await setDoc(doc(store, uid, firestoreAutoId()), {
+            await setDoc(doc(store, uid, id), {
+                id: id,
                 name: title,
                 priority: priorityValue,
                 column: "todo",
                 description: description,
                 conclusion: new Date(conclusion)
-              });
+            });
+            updatedCardsWithFirebase()
         })
 
-        const firestoreAutoId = () => {
+        function firestoreAutoId (){
             const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
           
             let autoId = ''
@@ -144,7 +125,92 @@
               )
             }
             return autoId
-          }
+        }
+
+        async function updatedCardsWithFirebase(){
+
+            const tasks = await getDocs(collection(store, uid));
+            clearDropzone()
+            
+            tasks.forEach((doc)=>{
+                
+                const data = doc.data();
+                const element = document.createElement("component-card");
+                element.title = data.name;
+                element.uid = data.id;
+
+                if(data.column == "todo"){
+                    todo.querySelector("div").appendChild(element)
+                }else if(data.column == "progress"){
+                    progress.querySelector("div").appendChild(element)
+                }else if(data.column == "done"){
+                    done.querySelector("div").appendChild(element)
+                }
+
+            })
+
+            const cards = document.querySelectorAll(".card");
+            const dropzones = document.querySelectorAll(".dropzone");
+
+            cards.forEach((card) => {
+                card.addEventListener("dragstart", dragstart);
+                card.addEventListener("dragend", dragend);
+            });
+
+            function dragstart() {
+                dropzones.forEach((dropzone) => dropzone.classList.add("highlight"));
+
+                this.classList.add("is-dragging");
+            }
+
+            function dragend() {
+                dropzones.forEach((dropzone) => dropzone.classList.remove("highlight"));
+                this.classList.remove("is-dragging");
+                
+                const column = this.parentElement.getAttribute("data-name");
+                const id = this.uid;
+                updateColumn( id, column)
+            }
+
+            dropzones.forEach((dropzone) => {
+                dropzone.addEventListener("dragover", dragover);
+                dropzone.addEventListener("dragleave", dragleave);
+                dropzone.addEventListener("drop", drop);
+            });
+
+            function dragover() {
+                this.classList.add("over");
+
+                const cardBeingDragged = document.querySelector(".is-dragging");
+
+                this.appendChild(cardBeingDragged);
+            }
+
+            function dragleave() {
+                this.classList.remove("over");
+            }
+
+            function drop() {
+                this.classList.remove("over");
+            }
+        }
+
+        async function updateColumn(id, column){
+            const docRef = doc(store, uid, id);
+
+            // Update the timestamp field with the value from the server
+            const updateTimestamp = await updateDoc(docRef, {
+                column: column
+            });
+        }
+        function clearDropzone(){
+            const dropzones = document.querySelectorAll('.dropzone');
+
+            dropzones.forEach(dropzone => {
+                dropzone.innerHTML = "";
+            })
+        }
       </script>
+    <script src="../scripts/app.js"></script>
 </body>
 </html>

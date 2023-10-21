@@ -1,9 +1,13 @@
 class Card extends HTMLElement{
+    constructor(){
+        super();
+    }
 
     connectedCallback(){
+        this.classList.add("card");
+        this.draggable = true;
         this.innerHTML = /*html*/`
-            <div class="card" draggable="true">
-                
+            <div  class="card-content">
                 <h3>${this.title}</h3>
 
                 <div class="status">
@@ -14,8 +18,7 @@ class Card extends HTMLElement{
                 </div>
             </div>
         `
-        this.style.color = "red"
     }
 }
 
-customElements.define("component-card", Card)
+customElements.define("component-card", Card);
