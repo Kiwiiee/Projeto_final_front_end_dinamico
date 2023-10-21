@@ -1,6 +1,38 @@
-component-card .card{
-    padding: 0.1rem .5rem;
-    background-color: white;
-    border-left: 6px solid var(--goiaba-amarelo);
-    border-radius: 6px;
+component-card {
+    &:hover{
+        cursor: pointer;
+    }
+    
+    & .card-content{
+        background-color: white;
+        padding: 16px;
+        box-shadow: 0 2px 2px -1px #FD951Fcc;
+        width: 100%;
+        min-height: 100px;
+        margin: 25px 0;
+        border-radius: 4px;
+        pointer-events: none;
+        font-weight: 600;
+        font-size: 18px;
+        
+        
+
+        & .status{
+            margin: .5rem 0;
+            width: 50px;
+            border-radius: .5rem;
+            height: 10px;
+            background-color: blue;
+        }
+    
+        & .low{
+            background-color: var(--goiaba-verde-dark);
+        }
+        & .medium{
+            background-color: var(--goiaba-amarelo);
+        }
+        & .high{
+            background-color: var(--goiaba-podi);
+        }
+    }
 }

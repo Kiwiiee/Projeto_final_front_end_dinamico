@@ -1,12 +1,16 @@
 :root{
-    --goiaba-verde-dark: #1c8839;
-    --goiaba-verde: #0bbf3c;
-    --goiaba-verde-light: #2be05b;
+    --goiaba-verde-dark: #0d835c;
+    --goiaba-verde: #10b981;
+    --goiaba-verde-light: #a7f3d0;
     --goiaba-amarelo: #F9BA32;
-    --goiaba-podi:#BF5A43 ;
+    --goiaba-podi:#e73d3d ;
+    --goiaba-podi-light:#f78787 ;
     font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 *{
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }

@@ -8,43 +8,106 @@
     <link rel="stylesheet" href="../styles/global.css">
 </head>
 <body>
-    <div id="column">
-        primeiro
-        <component-card title="Teste" ></component-card>
-        segundo
-        <component-card title="Penes"></component-card>
-    </div> 
+    <header>
+
+    </header>
+    <div class="columns">
+        <div id="todo">
+            <h2> Apha ze!</h2>
+            <br>
+            <div data-name="todo" class="dropzone"></div>
+        </div> 
+        <div id="progress">
+            <h2> Pha zenom!</h2>
+            <br>
+            <div data-name="progress" class="dropzone"></div>
+        </div> 
+        <div id="done">
+            <h2> Fazido!</h2>
+            <br>
+            <div data-name="done" class="dropzone"></div>
+        </div>
+    </div>
+    
     <div id="modal">
         <div id="modal-content">
-            <form action="">
-            <h2>ALA O GAY</h2>
-            <label for="titulo">Titulo</label>
-            <input id="titulo" placeholder="Insira o nome da tarefa!">
-            <span>Prioridade</span>
-            <label for="baixo">baixo</label>
-            <input id="baixo" name="prioridad" type="radio" value="baixo">
-
-            <label for="medio">medios</label>
-            <input id="medio" name="prioridad" type="radio" value="medio">
-
-            <label for="alto">altuns</label>
-            <input id="alto" name="prioridad" type="radio" value="alto">
-
-            <label for="data">Data de conclusão</label>
-            <input name="data" type="date">
+            <div class="modalheader">
+                <h2>Criar Tarefa</h2>
+                <span> X </span>
+            </div>
+            <form id="form">
             
-            <label for="descricao">Descrição</label>
-            <textarea name="descricao" placeholder="Insira a descrição da tarefa!"></textarea>
+                <label for="titulo">Titulo</label>
+                <input id="titulo" placeholder="Insira o nome da tarefa!">
+                <div class="prioridade">
+                    <span>Prioridade</span>
+                    <div class="seletor">
+                    <input id="baixo"  name="prioridad" type="radio" value="low">
+                    <label for="baixo">Baixa</label>    
+                    </div>
+                    <div class="seletor">
+                    <input id="medio"  name="prioridad" type="radio" value="medium">
+                    <label for="medio">Média</label>
+                    </div>
+                    <div class="seletor">
+                    <input id="alto"  name="prioridad" type="radio" value="high">
+                    <label for="alto">Alta</label>
+                    </div>
+                </div>
+                <label for="data">Data de conclusão</label>
+                <input name="data" id="data" type="date">
+                
+                <label for="descricao">Descrição</label>
+                <textarea rows="5" id="descricao" name="descricao" placeholder="Insira a descrição da tarefa!"></textarea>
 
+                <input type="submit" value="Criar tarefa">
+            </form>
+        </div>
+    </div>
+
+    <div id="modaldois">
+        <div id="modaldois-content">
+            <div class="modalheader">
+                <h2 id="mudae"></h2>
+                <span> X </span>
+            </div>
+            
+            <form id="modaldois-form">
+            
+                <label for="titulo">Titulo</label>
+                <input id="modaldois-titulo" placeholder="Insira o nome da tarefa!">
+                <div class="prioridade">
+                    <span>Prioridade</span>
+                    <div class="seletor">
+                    <input id="baixo"  name="modaldois-prioridad" type="radio" value="low">
+                    <label for="baixo">Baixa</label>    
+                    </div>
+                    <div class="seletor">
+                    <input id="medio"  name="modaldois-prioridad" type="radio" value="medium">
+                    <label for="medio">Média</label>
+                    </div>
+                    <div class="seletor">
+                    <input id="alto"  name="modaldois-prioridad" type="radio" value="high">
+                    <label for="alto">Alta</label>
+                    </div>
+                </div>
+                <label for="modaldois-data">Data de conclusão</label>
+                <input name="data" id="modaldois-data" type="date">
+                
+                <label for="modaldois-descricao">Descrição</label>
+                <textarea rows="5" id="modaldois-descricao" name="descricao" placeholder="Insira a descrição da tarefa!"></textarea>
+
+                <input type="submit" value="Editar tarefa">
+                <input type="button" value="Excluir tarefa" id="removeButton" class="removeButton">
             </form>
         </div>
     </div>
 
     <add-button></add-button>
-    <script src="../scripts/app.js"></script>
     <script type="module" src="../components/buttonAdd/addButton.js"></script>
     <script type="module" src="../components/card/card.js"></script>
     
-   
+    <script type="module" src="../scripts/firebase.js"></script>
+    <script src="../scripts/app.js"></script>
 </body>
 </html>
