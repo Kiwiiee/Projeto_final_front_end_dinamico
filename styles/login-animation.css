@@ -1,0 +1,217 @@
+.sign-in-js #modal_create .first-column {
+    z-index: -1;
+}
+
+.sign-in-js #modal_login .second-column {
+    z-index: 11;
+    animation: appear 0.9s;
+}
+.sign-in-js #modal_login .first-column {
+    z-index: 13;
+    animation: appear 0.9s;
+}
+
+.sign-in-js .content::before {
+    right: 60%;
+    animation: slideout 0.5s; /*MODIFIQUEI DE 3s PARA 1.3s*/
+    z-index: 12;
+}
+
+.sign-up-js .content::before {
+    background-color: #F9BA32;
+    left: 60%;
+    animation: slidein 0.5s; /*MODIFIQUEI DE 3s PARA 1.3s*/
+    z-index: 12;
+}
+
+.sign-up-js #modal_login .first-column,
+.sign-up-js #modal_login .second-column {
+    z-index: -1;
+}
+
+.sign-up-js #modal_create .second-column {
+    z-index: 11;
+    animation: appear 0.9s;
+}
+
+.sign-up-js #modal_create .first-column {
+    z-index: 13;    
+    animation: appear 0.9s;
+}
+
+
+/* DESLOCAMENTO CONTEÚDO ATRÁS DO CONTENT:BEFORE*/
+.sign-in-js #modal_create .second-column {
+
+    z-index: -1;
+    position: relative;
+    animation: deslocamentoEsq 0.7s; /*MODIFIQUEI DE 3s PARA 1.3s*/
+}
+
+.sign-up-js #modal_login .second-column {
+    position: relative;
+    z-index: -1;
+    animation: deslocamentoDir 0.7s; /*MODIFIQUEI DE 3s PARA 1.3s*/
+}
+
+
+
+
+@keyframes deslocamentoEsq {
+
+    from {
+        left: 0;
+        opacity: 1;
+        z-index: 12;
+    }
+
+    25% {
+        left: -60px;
+
+        /* z-index: 12; NÃO HÁ NECESSIDADE */
+    }
+
+    50% {
+        left: -80px;
+
+        /* z-index: 12; NÃO HÁ NECESSIDADE */
+    }
+
+    to {
+        left: -90px;
+        z-index: -1;
+    }
+}
+
+
+@keyframes deslocamentoDir {
+
+    from {
+        left: 0;
+        z-index: 12;
+    }
+
+    25% {
+        left: 70px;
+    }
+
+    50% {
+        left: 75px;
+        z-index: -1;
+       
+    }
+
+    to {
+        left: 80px;
+        
+    }
+}
+
+
+/*ANIMAÇÃO CSS*/
+
+@keyframes slidein {
+      
+    from {
+        left: 0;
+        width: 40%;
+        background-color: #449621
+    }
+
+    25% {
+        left: 10%;
+        width: 50%;
+        background-color: #54a827
+    }
+
+    50% {
+        left: 25%;
+        width: 60%;
+        background-color: #99c229
+    }
+
+    75% {
+        left: 45%;
+        width: 60%;
+        background-color: #c3c626
+    }
+
+    to {
+        left: 60%;
+        width: 40%;
+        background-color: #F9BA32
+    }
+
+}
+
+
+@keyframes slideout {
+
+    
+    from {
+        left: 60%;
+        width: 40%;
+        background-color: #F9BA32
+    }
+
+    25% {
+        left: 45%;
+        width: 50%;
+        background-color: #c3c626
+    }
+
+    50% {
+        left: 25%;
+        width: 60%;
+        background-color: #99c229
+
+    }
+
+    75% {
+        left: 5%;
+        width: 60%;
+        background-color: #54a827
+
+    }
+
+    to {
+        left: 0;
+        width: 40%;
+        background-color: #449621
+        
+    }
+
+
+ 
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+
+
+    75% {
+        opacity: 0.9;
+
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes rainbow{
+
+0% {
+    background-position: 0% 50%;
+}
+
+50% {
+    background-position: 100% 25%;
+}
+100% {
+    background-position: 0% 50%;
+}
+
+}

@@ -2,24 +2,24 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(237, 239, 218);
+    background-color: rgb(201, 229, 201);
     flex-direction: column;
     height: 97vh;
     font-family: 'Montserrat', sans-serif;
 
+    overflow-y: hidden;
+    overflow-x: hidden;
+
 
 }
 
-#create {
-    background-color: rgb(28, 136, 57);
-}
 #login {
-    background-color: rgb(149, 166, 44);
+    z-index: -5;
 }
 
 
 
-div{
+div , form{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,7 +32,23 @@ div{
     width: 50vw;
     height: 60vh;
     border-radius: 20px;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
 }
+
+.content::before {
+    content: "";
+    position: absolute;
+    background-color:#1c8839;
+    width: 40%;
+    height: 100%;
+    border-radius: 20px;
+
+
+    left: 0;
+}
+
 
 #modal_create{
     flex-direction: row-reverse;
@@ -47,8 +63,11 @@ div{
 .first-column{
     height: 60vh;
     border-radius: 20px;
-    width: 20vw;
+    width: 500vw;
+    z-index: 10;
 }
+
+
 
 
 .first-column p , .first-column h2{
@@ -69,7 +88,7 @@ p{
 }
 
 .second-column{
-    width: 30vw;
+    width: 800vw;
 
 }
 
@@ -92,170 +111,35 @@ button{
     background-color:  rgba(209, 209, 209, 0.563);
     width: 10vw;
     height: 5vh;
+    cursor: pointer !important;
+}
+
+#goiaba{
+    position: absolute;
+    z-index: 1000;
+}
+
+span{
+    background-image: repeating-linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+    background-size: 800% 800%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbow 6s ease infinite;
 }
 
 
-.sign-in-js #modal_create .first-column {
-    z-index: -1;
-}
+@keyframes rainbow{
 
-.sign-in-js #modal_login .second-column {
-    z-index: 11;
-}
-.sign-in-js #modal_login .first-column {
-    z-index: 13;
-}
-
-.sign-in-js .first-column::before {
-    animation: slidein 1.3s; /*MODIFIQUEI DE 3s PARA 1.3s*/
-
-    z-index: 12;
-}
-
-.sign-up-js .content::before {
-    animation: slideout 1.3s; /*MODIFIQUEI DE 3s PARA 1.3s*/
-
-    z-index: 12;
-}
-
-.sign-up-js #modal_login .first-column,
-.sign-up-js #modal_login .second-column {
-    z-index: -1;
-}
-
-.sign-up-js #modal_create .second-column {
-    z-index: 11;
-}
-
-.sign-up-js #modal_create .first-column {
-    z-index: 13;    
-}
-
-
-/* DESLOCAMENTO CONTEÚDO ATRÁS DO CONTENT:BEFORE*/
-.sign-in-js #modal_create .second-column {
-
-    z-index: -1;
-    position: relative;
-    animation: deslocamentoEsq 1.3s; /*MODIFIQUEI DE 3s PARA 1.3s*/
-}
-
-.sign-up-js #modal_login .second-column {
-    position: relative;
-    z-index: -1;
-    animation: deslocamentoDir 1.3s; /*MODIFIQUEI DE 3s PARA 1.3s*/
-}
-
-
-
-
-@keyframes deslocamentoEsq {
-
-    from {
-        left: 0;
-        opacity: 1;
-        z-index: 12;
+    0% {
+        background-position: 0% 50%;
     }
-
-    25% {
-        left: -80px;
-        opacity: .5;
-        /* z-index: 12; NÃO HÁ NECESSIDADE */
-    }
-
+    
     50% {
-        left: -100px;
-        opacity: .2;
-        /* z-index: 12; NÃO HÁ NECESSIDADE */
+        background-position: 100% 25%;
     }
-
-    to {
-        left: -110px;
-        opacity: 0;
-        z-index: -1;
+    100% {
+        background-position: 0% 50%;
     }
-}
-
-
-@keyframes deslocamentoDir {
-
-    from {
-        left: 0;
-        z-index: 12;
+    
     }
-
-    25% {
-        left: 70px;
-    }
-
-    50% {
-        left: 75px;
-        z-index: -1;
-       
-    }
-
-    to {
-        left: 80px;
-        
-    }
-}
-
-
-/*ANIMAÇÃO CSS*/
-
-@keyframes slidein {
-
-    from {
-        left: 0;
-        width: 50vw;
-    }
-
-    25% {
-        left: 10vw;
-        width: 50%;
-    }
-
-    50% {
-        left: 20vw;
-        width: 60%;
-    }
-
-    75% {
-        left: 35vw;
-        width: 50%;
-    }
-
-    to {
-        left: 70vw;
-        width: 40%;
-    }
-}
-
-@keyframes slideout {
-
-    from {
-        left: 60%;
-        width: 40%;
-    }
-
-    25% {
-        left: 45%;
-        width: 50%;
-    }
-
-    50% {
-        left: 25%;
-        width: 60%;
-    }
-
-    75% {
-        left: 5%;
-        width: 50%;
-    }
-
-    to {
-        left: 0;
-        width: 40%;
-    }
-}
 
