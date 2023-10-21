@@ -3,11 +3,16 @@
 
 .columns{
     display: flex;
-    justify-content: space-between;
+    gap: 2rem;
+    padding: 1.5rem;
 }
 
+#todo, #progress, #done{
+    flex: 1 1 0%;
+    min-width: 300px;
+    max-width: 600px;
+}
 .column{
-    width: 300px;
     padding: 1rem 2rem;
     min-height: 100px;
     display: flex;
@@ -15,7 +20,37 @@
     background-color: gainsboro;
 }
 
-#modal{
+.dropzone {
+    padding: 16px;
+    min-width: 282px;
+    min-height: 200px;
+    background-color: #a7f3d0;
+}
+
+header{
+    width: 100vw;
+    height: 64px;
+    background-color: #10b981;
+}
+
+.highlight {
+    background-color: #a7f3d0aa;
+}
+
+.card, .dropzone {
+    transition: 400ms;
+}
+
+.is-dragging {
+    cursor: move;
+    opacity: 0.3;
+}
+
+.over {
+    background-color: #86efac;
+}
+
+#modal, #modaldois{
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -27,7 +62,19 @@
     background-color: #0003;
     font-size: 16px;
 
-    & #modal-content{
+    & .modalheader{
+        display: flex;
+        align-items: center;
+        
+        & span{
+            font-weight: bold;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
+
+    & #modal-content, #modaldois-content{
         max-width: 30%;
         background-color: white;
         border-radius: .4rem;
@@ -50,6 +97,10 @@
                 font-size: 18px;
                 font-weight: bold;
                 user-select: none;
+
+                &:hover{
+                    cursor: pointer;
+                }
             }
             
             & .prioridade{
@@ -58,7 +109,7 @@
                 justify-content: center;
                 
                 & label{
-                    font-size: 14px;
+                    font-size: 16px;
                     font-weight: normal;
                     user-select: none;
                 }
@@ -72,6 +123,7 @@
                 padding: .5rem;
                 border-radius: .5rem;
                 margin-bottom: 1rem;
+                font-size: 15px;
             }
             & input[type="submit"]{
                 position: relative;
@@ -90,18 +142,34 @@
             }
 
             & textarea{
+                padding: .3rem;
                 width: 100%;
                 margin: .5rem 0;
                 border-radius: .5rem;
                 resize: none;
-                font-size: 16px;
+                font-size: 14px;
+                border: 2px black solid;
+                font-family: 'Montserrat', sans-serif
             }
             
         }
     }
 }
 
-
+.removeButton{
+    position: relative;
+                border: .2rem var(--goiaba-podi) solid;
+                color: white;
+                background-color: var(--goiaba-podi);
+                cursor: pointer;
+                transition: .25s;
+                max-width: 10rem;
+                right: 0;
+                bottom: 0;
+                &:hover{
+                    background-color: var(--goiaba-podi-light);
+                }
+}
 
 .modalVisible{
     display: flex !important;

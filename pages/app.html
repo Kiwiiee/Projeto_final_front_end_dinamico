@@ -13,19 +13,28 @@
     </header>
     <div class="columns">
         <div id="todo">
+            <h2> Apha ze!</h2>
+            <br>
             <div data-name="todo" class="dropzone"></div>
         </div> 
         <div id="progress">
+            <h2> Pha zenom!</h2>
+            <br>
             <div data-name="progress" class="dropzone"></div>
         </div> 
         <div id="done">
+            <h2> Fazido!</h2>
+            <br>
             <div data-name="done" class="dropzone"></div>
         </div>
     </div>
     
     <div id="modal">
         <div id="modal-content">
-            <h2>Criar Tarefa</h2>
+            <div class="modalheader">
+                <h2>Criar Tarefa</h2>
+                <span> X </span>
+            </div>
             <form id="form">
             
                 <label for="titulo">Titulo</label>
@@ -33,15 +42,15 @@
                 <div class="prioridade">
                     <span>Prioridade</span>
                     <div class="seletor">
-                    <input id="baixo"  name="prioridad" type="radio" value="baixo">
+                    <input id="baixo"  name="prioridad" type="radio" value="low">
                     <label for="baixo">Baixa</label>    
                     </div>
                     <div class="seletor">
-                    <input id="medio"  name="prioridad" type="radio" value="medio">
+                    <input id="medio"  name="prioridad" type="radio" value="medium">
                     <label for="medio">Média</label>
                     </div>
                     <div class="seletor">
-                    <input id="alto"  name="prioridad" type="radio" value="alto">
+                    <input id="alto"  name="prioridad" type="radio" value="high">
                     <label for="alto">Alta</label>
                     </div>
                 </div>
@@ -56,161 +65,49 @@
         </div>
     </div>
 
+    <div id="modaldois">
+        <div id="modaldois-content">
+            <div class="modalheader">
+                <h2 id="mudae"></h2>
+                <span> X </span>
+            </div>
+            
+            <form id="modaldois-form">
+            
+                <label for="titulo">Titulo</label>
+                <input id="modaldois-titulo" placeholder="Insira o nome da tarefa!">
+                <div class="prioridade">
+                    <span>Prioridade</span>
+                    <div class="seletor">
+                    <input id="baixo"  name="modaldois-prioridad" type="radio" value="low">
+                    <label for="baixo">Baixa</label>    
+                    </div>
+                    <div class="seletor">
+                    <input id="medio"  name="modaldois-prioridad" type="radio" value="medium">
+                    <label for="medio">Média</label>
+                    </div>
+                    <div class="seletor">
+                    <input id="alto"  name="modaldois-prioridad" type="radio" value="high">
+                    <label for="alto">Alta</label>
+                    </div>
+                </div>
+                <label for="modaldois-data">Data de conclusão</label>
+                <input name="data" id="modaldois-data" type="date">
+                
+                <label for="modaldois-descricao">Descrição</label>
+                <textarea rows="5" id="modaldois-descricao" name="descricao" placeholder="Insira a descrição da tarefa!"></textarea>
+
+                <input type="submit" value="Editar tarefa">
+                <input type="button" value="Excluir tarefa" id="removeButton" class="removeButton">
+            </form>
+        </div>
+    </div>
+
     <add-button></add-button>
     <script type="module" src="../components/buttonAdd/addButton.js"></script>
     <script type="module" src="../components/card/card.js"></script>
     
-   
-    <script type="module">
-        import {initializeApp} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"
-        import { getFirestore, getDocs, updateDoc, collection,setDoc, doc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
-        
-        const todo = document.getElementById("todo");
-        const progress = document.getElementById("progress");
-        const done = document.getElementById("done");
-        const modal = document.getElementById("modal");
-
-        const firebaseConfig = {
-          apiKey: "AIzaSyCg9aild2T5jd9b9WJBxVWfrBoopwn4fCs",
-          authDomain: "goada-d6121.firebaseapp.com",
-          projectId: "goada-d6121",
-          storageBucket: "goada-d6121.appspot.com",
-          messagingSenderId: "630141478826",
-          appId: "1:630141478826:web:39fd58178453ca968cadd3"
-        };
-        
-        const uid = localStorage.getItem("uid");
-        if(uid == "" || uid == undefined){
-            window.location.href = "/index.html"
-        }
-        const app = initializeApp(firebaseConfig);
-        
-        const store = getFirestore(app);
-        updatedCardsWithFirebase();
-
-        form.addEventListener("submit", async (e)=>{
-            e.preventDefault();
-            modal.classList.remove("modalVisible")
-            const title = document.getElementById("titulo").value;
-            const priority = document.getElementsByName("prioridad");
-            let priorityValue = "";
-            
-            for (let i = 0; i < priority.length; i++) {
-                if (priority[i].checked)
-                    priorityValue = priority[i].value;
-            }
-            const conclusion = document.getElementById("data").value;
-            const description = document.getElementById("descricao").value;
-            const id = firestoreAutoId();
-
-            await setDoc(doc(store, uid, id), {
-                id: id,
-                name: title,
-                priority: priorityValue,
-                column: "todo",
-                description: description,
-                conclusion: new Date(conclusion)
-            });
-            updatedCardsWithFirebase()
-        })
-
-        function firestoreAutoId (){
-            const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-          
-            let autoId = ''
-          
-            for (let i = 0; i < 20; i++) {
-              autoId += CHARS.charAt(
-                Math.floor(Math.random() * CHARS.length)
-              )
-            }
-            return autoId
-        }
-
-        async function updatedCardsWithFirebase(){
-
-            const tasks = await getDocs(collection(store, uid));
-            clearDropzone()
-            
-            tasks.forEach((doc)=>{
-                
-                const data = doc.data();
-                const element = document.createElement("component-card");
-                element.title = data.name;
-                element.uid = data.id;
-
-                if(data.column == "todo"){
-                    todo.querySelector("div").appendChild(element)
-                }else if(data.column == "progress"){
-                    progress.querySelector("div").appendChild(element)
-                }else if(data.column == "done"){
-                    done.querySelector("div").appendChild(element)
-                }
-
-            })
-
-            const cards = document.querySelectorAll(".card");
-            const dropzones = document.querySelectorAll(".dropzone");
-
-            cards.forEach((card) => {
-                card.addEventListener("dragstart", dragstart);
-                card.addEventListener("dragend", dragend);
-            });
-
-            function dragstart() {
-                dropzones.forEach((dropzone) => dropzone.classList.add("highlight"));
-
-                this.classList.add("is-dragging");
-            }
-
-            function dragend() {
-                dropzones.forEach((dropzone) => dropzone.classList.remove("highlight"));
-                this.classList.remove("is-dragging");
-                
-                const column = this.parentElement.getAttribute("data-name");
-                const id = this.uid;
-                updateColumn( id, column)
-            }
-
-            dropzones.forEach((dropzone) => {
-                dropzone.addEventListener("dragover", dragover);
-                dropzone.addEventListener("dragleave", dragleave);
-                dropzone.addEventListener("drop", drop);
-            });
-
-            function dragover() {
-                this.classList.add("over");
-
-                const cardBeingDragged = document.querySelector(".is-dragging");
-
-                this.appendChild(cardBeingDragged);
-            }
-
-            function dragleave() {
-                this.classList.remove("over");
-            }
-
-            function drop() {
-                this.classList.remove("over");
-            }
-        }
-
-        async function updateColumn(id, column){
-            const docRef = doc(store, uid, id);
-
-            // Update the timestamp field with the value from the server
-            const updateTimestamp = await updateDoc(docRef, {
-                column: column
-            });
-        }
-        function clearDropzone(){
-            const dropzones = document.querySelectorAll('.dropzone');
-
-            dropzones.forEach(dropzone => {
-                dropzone.innerHTML = "";
-            })
-        }
-      </script>
+    <script type="module" src="../scripts/firebase.js"></script>
     <script src="../scripts/app.js"></script>
 </body>
 </html>
