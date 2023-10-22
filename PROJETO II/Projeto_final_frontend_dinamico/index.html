@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./styles/login.css">
+    <link rel="stylesheet" href="./styles/login-animation.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,800;1,800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+
+    </nav>
+    <div id="modal_create" class="content">
+        <div id="login" class="first-column">
+            <h2>Seja bem vindo de volta à <span>Go Ada</span>! :)</h2>
+            <p class="description">Acesse novamente sua conta e seja feliz!!</p>
+            <button class="button" id="signin">Sign in</button>
+        </div>
+        <form id="create_focus" class="second-column">
+            <h2>Crie uma conta</h2>
+            
+            <div>
+            <p>...ou use seu e-mail</p>
+  
+
+            <input type="text" id="create-name" class="name" placeholder="Nome" >
+            <input type="text" id="create-email" class="email" placeholder="Email">
+            <input type="text"  id="create-password" class="password" placeholder="Senha">
+            <button class="button sign_up" id="criar_conta">Sign up</button>
+            </div>
+          </form>
+    </div>
+    <div id="modal_login" class="content">
+        <div id="create"  class="first-column">
+            <h2>Olá Amigo! :)</h2>
+            <p  class="description">Não tem conta ainda!?!? Junte-se imediatamente à <span>Go Ada</span></p>
+            
+            <button class="button" id="signup">Sign up</button>
+        </div>
+        
+        <div id="login_focus"  class="second-column">
+          
+            <h2>Acesse sua conta</h2>
+            <section id="social_media">
+              <a href="#" class="link" id="instagram">
+                <i class="fa-brands fa-instagram"></i>
+              <a href="#" class="link" id="facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+              <a href="#" class="link" id="google">
+                <i class="fa-brands fa-google"></i>
+              </section>
+            <form id="form">
+              <p>...ou use seu e-mail</p>
+              
+              <input type="text" class="email" placeholder="Email" id="email_access">
+              <input type="text" class="password" placeholder="Senha" id="password_access">
+              
+              <button class="button sign_in" id="acessar_conta">Sign in</button>
+            </form>
+            
+        </div>
+        
+    </div>
+    
+    <script src="./scripts/login-cadastro.js"></script>
+
+    <script type="module">
+      import {initializeApp} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"
+      import { getFirestore, setDoc, doc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+      import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword  } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js'
+      const firebaseConfig = {
+        apiKey: "AIzaSyCg9aild2T5jd9b9WJBxVWfrBoopwn4fCs",
+        authDomain: "goada-d6121.firebaseapp.com",
+        projectId: "goada-d6121",
+        storageBucket: "goada-d6121.appspot.com",
+        messagingSenderId: "630141478826",
+        appId: "1:630141478826:web:39fd58178453ca968cadd3"
+      };
+    
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth();
+      const store = getFirestore(app);
+      
+      const form = document.getElementById("form")
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        console.log(email, password)
+
+        try{
+          const user = await signInWithEmailAndPassword(auth, email, password);
+          localStorage.setItem("uid", "qajuauNv8fXsiFcXbN2QWjLJ1oZ2");
+          window.location.href = "/pages/app.html"
+
+        }catch(err){
+          console.log(err)
+        }
+      
+      })
+
+      const createForm = document.getElementById("create_focus");
+
+      createForm.addEventListener("submit",async (e) => {
+        e.preventDefault();
+        const email = document.getElementById("create-email").value;
+        const name = document.getElementById("create-name").value;
+        const password = document.getElementById("create-password").value;
+
+        try{
+          const user = await createUserWithEmailAndPassword(auth, email, password);
+          await setDoc(doc(store, "Users", user.user.uid), {
+            name: name,
+            email: email,
+            password: password
+          });
+          await setDoc(doc(store, user.user.uid, "Tasks"), {
+            name: "Tarefa exemplo!",
+            priority: "low",
+            column: "todo",
+            description: "Clique duas vezes na tarefa para edita-la",
+            conclusion: new Date()
+          });
+    
+          localStorage.setItem("uid", user.user.uid);
+          window.location.href = "/pages/app.html"
+
+        }catch(err){
+          console.log(err)
+        }
+      
+      })
+    </script>
+</body>
+</html>
