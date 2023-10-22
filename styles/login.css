@@ -143,3 +143,35 @@ span{
     
     }
 
+#social_media{
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2vh;
+
+}
+
+.link{
+    text-decoration: none;
+}
+
+#social_media .link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.4rem;
+    width: 2.5rem;
+    color: white;
+    border-radius: 70%;
+    
+}
+
+#instagram {
+background: linear-gradient(#7f37c9, #ff2992, #ff9807 );
+}
+#facebook {
+background-color: #4267b3;
+}
+#google {
+background: linear-gradient(#4285f4, #34a853,#fbbc05, #ea4335);
+}

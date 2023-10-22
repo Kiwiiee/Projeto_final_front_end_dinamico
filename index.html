@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./styles/login.css">
     <link rel="stylesheet" href="./styles/login-animation.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,16 +22,8 @@
             <button class="button" id="signin">Sign in</button>
         </div>
         <form id="create_focus" class="second-column">
-            <h2>Crie uma conta</h2>
-            <section>
-            <a href=""><img src="" alt=""></a>
-            <a href=""><img src="" alt=""></a>
-            <a href=""><img src="" alt=""></a>
-            </section>
+            <h2>Crie uma conta</h2> 
             <div>
-            <p>...ou use seu e-mail</p>
-  
-
             <input type="text" id="create-name" class="name" placeholder="Nome" >
             <input type="text" id="create-email" class="email" placeholder="Email">
             <input type="text"  id="create-password" class="password" placeholder="Senha">
@@ -46,6 +39,16 @@
         </div>
         <div id="login_focus"  class="second-column">
             <h2>Acesse sua conta</h2>
+            <section id="social_media">
+              <a href="#" class="link" id="instagram">
+                <i class="fa-brands fa-instagram"></i>
+              <a href="#" class="link" id="facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+              <a href="#" class="link" id="google">
+                <i class="fa-brands fa-google"></i>
+                <br><br>
+              </section>
+              
             <form id="form">
               <p>...ou use seu e-mail</p>
               <input type="text" class="email" placeholder="Email" id="email_access">
