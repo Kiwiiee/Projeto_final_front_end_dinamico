@@ -1,0 +1,172 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(201, 229, 201);
+    flex-direction: column;
+    height: 97vh;
+    font-family: 'Montserrat', sans-serif;
+
+    overflow-y: hidden;
+    overflow-x: hidden;
+
+
+}
+
+#login {
+    z-index: -5;
+}
+
+
+
+div, form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.content{
+    flex-direction: row;
+    background-color: rgb(228, 228, 228);
+    width: 50vw;
+    height: 60vh;
+    border-radius: 20px;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.content::before {
+    content: "";
+    position: absolute;
+    background-color:#1c8839;
+    width: 40%;
+    height: 100%;
+    border-radius: 20px;
+
+
+    left: 0;
+}
+
+
+#modal_create{
+    flex-direction: row-reverse;
+}
+
+#modal_login{
+    position: absolute;
+    
+}
+
+
+.first-column{
+    height: 60vh;
+    border-radius: 20px;
+    width: 500vw;
+    z-index: 10;
+}
+
+
+
+
+.first-column p , .first-column h2{
+    color: white;
+
+}
+
+h2{
+    font-weight: 800;
+    font-size: 40px;
+    text-align: center;
+}
+
+p{
+    font-size: 20px;
+    width: 15vw;
+    text-align: center;
+}
+
+.second-column{
+    width: 800vw;
+
+}
+
+input{
+    width: 20vw;
+    height: 5vh;
+    background-color: rgb(231, 230, 230);
+    border-radius: 7px;
+    border-width: 1px;
+    margin-bottom: 1vh;
+    font-size: 15px ;
+}
+
+button{
+    margin-top: 4vh;
+    border-radius: 20px;
+    border-width: 2px;
+    font-size: 15px ;
+    font-weight: bold;
+    background-color:  rgba(209, 209, 209, 0.563);
+    width: 10vw;
+    height: 5vh;
+    cursor: pointer !important;
+}
+
+#goiaba{
+    position: absolute;
+    z-index: 1000;
+}
+
+span{
+    background-image: repeating-linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+    background-size: 800% 800%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbow 6s ease infinite;
+}
+
+
+@keyframes rainbow{
+
+    0% {
+        background-position: 0% 50%;
+    }
+    
+    50% {
+        background-position: 100% 25%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+    
+    }
+
+    #social media{
+        display: flex;
+        gap: 2rem;
+        margin-top: 1.5rem;
+       
+    }
+    
+    #social_media .link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 2.4rem;
+        width: 2.5rem;
+        color: white;
+        border-radius: 70%;
+    }
+    
+    #instagram {
+        background: linear-gradient(#7f37c9, #ff2992, #ff9807 );
+    }
+    #facebook {
+        background-color: #4267b3;
+    }
+    #google {
+        background: linear-gradient(#4285f4, #34a853,#fbbc05, #ea4335);
+    }
+    
